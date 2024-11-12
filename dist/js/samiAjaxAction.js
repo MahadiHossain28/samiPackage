@@ -18,7 +18,7 @@
                 if(settings.imagePrev == true){
                     $('.prev_image_view').html("");
                     $('.prev_image_view').append('\
-                        <img src="'+ imagePath + response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="prev_image" class="prev_image w-100">\
+                        <img src="'+ settings.imagePath + response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="prev_image" class="prev_image w-100">\
                     ');
                 }
                 if(settings.cloudImagePrev == true){
