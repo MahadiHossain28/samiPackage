@@ -1,4 +1,43 @@
 (function ($) {
+    $.fn.handleGetData = function (options) {
+        let settings = $.extend({
+            modalId: null,
+            valuesId: {},
+            ReturnFromApi:'',
+            imagePrev: false,
+            cloudImagePrev: false,
+            dbImgColName:'',
+            imagePath:''
+        }, options);
+        let url = $(this).val();
+        $('#'+ settings.modalId).modal('show');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (response) {
+                if(settings.imagePrev == true){
+                    $('.prev_image_view').html("");
+                    $('.prev_image_view').append('\
+                        <img src="'+ imagePath + response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="prev_image" class="prev_image w-100">\
+                    ');
+                }
+                if(settings.cloudImagePrev == true){
+                    $('.prev_image_view').html("");
+                    $('.prev_image_view').append('\
+                        <img src="'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="prev_image" class="prev_image w-100">\
+                    ');
+                }
+                for (let key in settings.valuesId) {
+                    if (settings.valuesId.hasOwnProperty(key) && response[settings.ReturnFromApi].hasOwnProperty(key)) {
+                        $('#' + settings.valuesId[key]).val(response[settings.ReturnFromApi][key]);
+                    }
+                }
+            }
+        });
+    };
+})(jQuery);
+
+(function ($) {
     $.fn.handleEdit = function (options) {
         let settings = $.extend({
             modalId: null,

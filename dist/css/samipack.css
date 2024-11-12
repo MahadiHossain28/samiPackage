@@ -15,7 +15,7 @@ body {
 /* Custom Toast CSS Start */
 .cus_toast,
 .cus_toast1 {
-    position: absolute;
+    position: fixed;
     top: var(--cus_toast_top);
     right: 30px;
     border-radius: 12px;
@@ -206,3 +206,16 @@ button:hover {
 }
 
 /* Custom Image Preview CSS End */
+
+@media screen and (max-width: 376px) {
+    .cus_toast,
+    .cus_toast1 {
+        right: 12px;
+        padding: 15px 15px 20px 15px;
+    }
+
+    .cus_toast.active,
+    .cus_toast1.active {
+        transform: translateX(2%);
+    }
+}

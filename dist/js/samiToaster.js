@@ -40,6 +40,8 @@
 
         timer2 = setTimeout(() => {
             $(".progress").removeClass("active");
+            $(".progress").remove();
+            $(".cus_toast").remove();
         }, end_time);
 
         $(".cus_toast").mouseover(function () {
@@ -57,6 +59,8 @@
 
             timer2 = setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast").remove();
             }, end_time);
         });
 
@@ -64,6 +68,8 @@
             action_class.removeClass("active");
             setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast").remove();
             }, progress_time);
 
             clearTimeout(timer1);
@@ -133,6 +139,8 @@
 
         t_timer2 = setTimeout(() => {
             $(".progress").removeClass("active");
+            $(".progress").remove();
+            $(".cus_toast1").remove();
         }, end_time);
 
         $(".cus_toast1").mouseover(function () {
@@ -150,6 +158,8 @@
 
             t_timer2 = setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast1").remove();
             }, end_time);
         });
 
@@ -158,6 +168,8 @@
             $(".cus_toast1").remove();
             setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast1").remove();
             }, progress_time);
 
             clearTimeout(t_timer1);

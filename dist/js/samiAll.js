@@ -40,6 +40,8 @@
 
         timer2 = setTimeout(() => {
             $(".progress").removeClass("active");
+            $(".progress").remove();
+            $(".cus_toast").remove();
         }, end_time);
 
         $(".cus_toast").mouseover(function () {
@@ -57,6 +59,8 @@
 
             timer2 = setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast").remove();
             }, end_time);
         });
 
@@ -64,6 +68,8 @@
             action_class.removeClass("active");
             setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast").remove();
             }, progress_time);
 
             clearTimeout(timer1);
@@ -133,6 +139,8 @@
 
         t_timer2 = setTimeout(() => {
             $(".progress").removeClass("active");
+            $(".progress").remove();
+            $(".cus_toast1").remove();
         }, end_time);
 
         $(".cus_toast1").mouseover(function () {
@@ -150,6 +158,8 @@
 
             t_timer2 = setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast1").remove();
             }, end_time);
         });
 
@@ -158,6 +168,8 @@
             $(".cus_toast1").remove();
             setTimeout(() => {
                 $(".progress").removeClass("active");
+                $(".progress").remove();
+                $(".cus_toast1").remove();
             }, progress_time);
 
             clearTimeout(t_timer1);
@@ -204,6 +216,45 @@
 
         $("#CloseBtn").on("click", function () {
             $("#FullImageView").css("display", "none");
+        });
+    };
+})(jQuery);
+
+(function ($) {
+    $.fn.handleGetData = function (options) {
+        let settings = $.extend({
+            modalId: null,
+            valuesId: {},
+            ReturnFromApi:'',
+            imagePrev: false,
+            cloudImagePrev: false,
+            dbImgColName:'',
+            imagePath:''
+        }, options);
+        let url = $(this).val();
+        $('#'+ settings.modalId).modal('show');
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (response) {
+                if(settings.imagePrev == true){
+                    $('.prev_image_view').html("");
+                    $('.prev_image_view').append('\
+                        <img src="'+ imagePath + response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="prev_image" class="prev_image w-100">\
+                    ');
+                }
+                if(settings.cloudImagePrev == true){
+                    $('.prev_image_view').html("");
+                    $('.prev_image_view').append('\
+                        <img src="'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="prev_image" class="prev_image w-100">\
+                    ');
+                }
+                for (let key in settings.valuesId) {
+                    if (settings.valuesId.hasOwnProperty(key) && response[settings.ReturnFromApi].hasOwnProperty(key)) {
+                        $('#' + settings.valuesId[key]).val(response[settings.ReturnFromApi][key]);
+                    }
+                }
+            }
         });
     };
 })(jQuery);
