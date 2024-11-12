@@ -5,21 +5,21 @@ This repository contains a collection of JavaScript functions designed to perfor
 1. First Add Jquery CDN from [Jsdelivr](https://www.jsdelivr.com/package/npm/jquery) or [cdnjs](https://cdnjs.com/libraries/jquery).
 2. Copy This JS URL/Script
 ```javascript
- https://cdn.jsdelivr.net/gh/UnanimousIT/samiPackage/dist/js/samipack.min.js
+ https://cdn.jsdelivr.net/gh/MahadiHossain28/samiPackage/dist/js/samiAll.min.js
 ```
 or
 
 ```apacheconf
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/UnanimousIT/samiPackage/dist/js/samipack.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/MahadiHossain28/samiPackage/dist/js/samiAll.min.js"></script>
 ```
 3. Copy This CSS URL/CSS
 ```javascript
- https://cdn.jsdelivr.net/gh/UnanimousIT/samiPackage/dist/css/samipack.min.css
+ https://cdn.jsdelivr.net/gh/MahadiHossain28/samiPackage/dist/css/samipack.min.css
 ```
 or
 
 ```apacheconf
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/UnanimousIT/samiPackage/dist/css/samipack.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MahadiHossain28/samiPackage/dist/css/samipack.min.css">
 ```
 
 
