@@ -1,5 +1,33 @@
 (function ($) {
-    $.fn.handleGetData = function (options) {
+    $.fn.GetData = function (options) {
+        let settings = $.extend({
+            url: '',
+            modalId: null,
+            callback: null
+        }, options);
+
+        // let url = settings.url;
+        let url = $(this).val();
+
+        if (settings.modalId) {
+            $('#' + settings.modalId).modal('show');
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (response) {
+                settings.callback(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ', error);
+            }
+        });
+    };
+})(jQuery);
+
+(function ($) {
+    $.fn.handleEdit = function (options) {
         let settings = $.extend({
             modalId: null,
             valuesId: {},
@@ -37,54 +65,55 @@
     };
 })(jQuery);
 
-(function ($) {
-    $.fn.handleEdit = function (options) {
-        let settings = $.extend({
-            modalId: null,
-            valuesId: {},
-            ReturnFromApi:'',
-            imagePrev: false,
-            cloudImagePrev: false,
-            dbImgColName:''
-        }, options);
-        let url = $(this).val();
-        $('#'+ settings.modalId).modal('show');
-        $.ajax({
-            type: "GET",
-            url: url,
-            success: function (response) {
-                if(settings.imagePrev == true){
-                    $('.prev_image_view').html("");
-                    $('.prev_image_view').append('\
-                        <img src="/uploads/banner/'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="" class="prev_banner_image w-100">\
-                    ');
-                }
-                if(settings.cloudImagePrev == true){
-                    $('.prev_image_view').html("");
-                    $('.prev_image_view').append('\
-                        <img src="'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="" class="prev_banner_image w-100">\
-                    ');
-                }
-                for (let key in settings.valuesId) {
-                    if (settings.valuesId.hasOwnProperty(key) && response[settings.ReturnFromApi].hasOwnProperty(key)) {
-                        $('#' + settings.valuesId[key]).val(response[settings.ReturnFromApi][key]);
-                    }
-                }
-            }
-        });
-    };
-})(jQuery);
+// (function ($) {
+//     $.fn.oldhandleEdit = function (options) {
+//         let settings = $.extend({
+//             modalId: null,
+//             valuesId: {},
+//             ReturnFromApi:'',
+//             imagePrev: false,
+//             cloudImagePrev: false,
+//             dbImgColName:''
+//         }, options);
+//         let url = $(this).val();
+//         $('#'+ settings.modalId).modal('show');
+//         $.ajax({
+//             type: "GET",
+//             url: url,
+//             success: function (response) {
+//                 if(settings.imagePrev == true){
+//                     $('.prev_image_view').html("");
+//                     $('.prev_image_view').append('\
+//                         <img src="/uploads/banner/'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="" class="prev_banner_image w-100">\
+//                     ');
+//                 }
+//                 if(settings.cloudImagePrev == true){
+//                     $('.prev_image_view').html("");
+//                     $('.prev_image_view').append('\
+//                         <img src="'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="" class="prev_banner_image w-100">\
+//                     ');
+//                 }
+//                 for (let key in settings.valuesId) {
+//                     if (settings.valuesId.hasOwnProperty(key) && response[settings.ReturnFromApi].hasOwnProperty(key)) {
+//                         $('#' + settings.valuesId[key]).val(response[settings.ReturnFromApi][key]);
+//                     }
+//                 }
+//             }
+//         });
+//     };
+// })(jQuery);
 
 (function ($) {
     $.fn.handlesubmit = function (formData,options) {
         let settings = $.extend({
             modalId: null,
             listName: null,
+            methodType: 'POST',
         }, options);
         let url = $(this).attr('action');
         $.ajax({
             url: url,
-            type: 'POST',
+            type: settings.methodType,
             data: formData,
             processData: false,
             contentType: false,
@@ -114,27 +143,31 @@
 (function ($) {
     $.fn.handleDelete = function (options) {
         let settings = $.extend({
-            url: '',
+            // url: '',
             modalId: null,
             msg: null,
         }, options);
-        let showValue = $(this).val();
+
+        let url = $(this).val();
+        let showValue = $(this).attr('data-value-name');
 
         let showMsg;
 
         if (settings.msg === null) {
-            showMsg = 'Are You Sure To Delete ' + showValue + ' ?';
+            showMsg = 'Are You Sure To Delete  <span class= "text-dark fw-bold"> ' + showValue + ' </span>  ?';
         } else {
-            showMsg = settings.msg + ' ' + showValue + ' ?';
+            showMsg = settings.msg + ' <span class= "text-dark fw-bold">' + showValue + ' </span> ?';
         }
 
         $('#' + settings.modalId).modal('show');
 
         $('.delete_alert_div').html("");
         $('.delete_alert_div').append('\
-                <h6 class="text-danger mb-3">' + showMsg + '</h6>\
+            <h5 class="text-danger mb-4 text-capitalize">' + showMsg + '</h5>\
+            <div class="mb-4">\
                 <button type="button" class="btn btn-secondary delete_alert" data-bs-dismiss="modal">No, Close</button>\
-                <a href="' + settings.url + '" class="btn btn-danger">Yes, Delete</a>\
-            ');
+                <a href="' + url + '" class="btn btn-danger">Yes, Delete</a>\
+            </div>\
+        ');
     };
 })(jQuery);
