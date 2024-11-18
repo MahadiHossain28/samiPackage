@@ -330,6 +330,7 @@
         let settings = $.extend({
             modalId: null,
             listName: null,
+            classWithId: null,
             methodType: 'POST',
         }, options);
         let url = $(this).attr('action');
@@ -356,6 +357,7 @@
                     $.each(response.error, function (key, value) {
                         $('.' + key + '_error').text(value);
                     });
+                    $('.' + settings.classWithId + response.id).click();
                 }
             },
         });
