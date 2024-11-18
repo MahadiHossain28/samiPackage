@@ -357,7 +357,7 @@
                     $.each(response.error, function (key, value) {
                         $('.' + key + '_error').text(value);
                     });
-                    $('.' + settings.classWithId + response.id).click();
+                    $('.' + settings.classWithId + response.id).trigger('click');
                 }
             },
         });
