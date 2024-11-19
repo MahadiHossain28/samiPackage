@@ -287,44 +287,6 @@
     };
 })(jQuery);
 
-// (function ($) {
-//     $.fn.oldhandleEdit = function (options) {
-//         let settings = $.extend({
-//             modalId: null,
-//             valuesId: {},
-//             ReturnFromApi:'',
-//             imagePrev: false,
-//             cloudImagePrev: false,
-//             dbImgColName:''
-//         }, options);
-//         let url = $(this).val();
-//         $('#'+ settings.modalId).modal('show');
-//         $.ajax({
-//             type: "GET",
-//             url: url,
-//             success: function (response) {
-//                 if(settings.imagePrev == true){
-//                     $('.prev_image_view').html("");
-//                     $('.prev_image_view').append('\
-//                         <img src="/uploads/banner/'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="" class="prev_banner_image w-100">\
-//                     ');
-//                 }
-//                 if(settings.cloudImagePrev == true){
-//                     $('.prev_image_view').html("");
-//                     $('.prev_image_view').append('\
-//                         <img src="'+ response[settings.ReturnFromApi][settings.dbImgColName] +'" alt="" class="prev_banner_image w-100">\
-//                     ');
-//                 }
-//                 for (let key in settings.valuesId) {
-//                     if (settings.valuesId.hasOwnProperty(key) && response[settings.ReturnFromApi].hasOwnProperty(key)) {
-//                         $('#' + settings.valuesId[key]).val(response[settings.ReturnFromApi][key]);
-//                     }
-//                 }
-//             }
-//         });
-//     };
-// })(jQuery);
-
 (function ($) {
     $.fn.handleSubmit = function (formData,options) {
         let settings = $.extend({
@@ -393,5 +355,24 @@
                 <a href="' + url + '" class="btn btn-danger">Yes, Delete</a>\
             </div>\
         ');
+    };
+})(jQuery);
+
+(function ($) {
+    $.fn.handleDependentSelect = function (options) {
+        let settings = $.extend({
+            className: null,
+            attributeName: null
+        }, options);
+
+        let id = $(this).val();
+        let classAttrName = '.' + settings.className + '[' + settings.attributeName + ']';
+        let classAttrName2 = '.' + settings.className + '[' + settings.attributeName + '="' + id + '"]';
+
+        $(classAttrName).each(function () {
+            $(this).attr('hidden', true);
+        });
+
+        $(classAttrName2).removeAttr('hidden');
     };
 })(jQuery);
